@@ -1,0 +1,17 @@
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+}
+.contactForm button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.contactForm button:hover {
+  background-color: #45a049;
+}

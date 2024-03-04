@@ -1,0 +1,23 @@
+/* Contact.module.css */
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+.deleteButton {
+  background-color: #ff5f5f;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  background-color: #ff3333;
+}
