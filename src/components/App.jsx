@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact, deleteContact } from './Contacts/contactsSlice'; 
-import { updateFilter } from './Contacts/contactsSlice'; 
+import {
+  addContact,
+  deleteContact,
+  fetchContacts,
+} from './Contacts/contactsSlice';
+import { updateFilter } from './Contacts/contactsSlice';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
 import ContactForm from './ContactForm.jsx/ContactForm';
@@ -9,11 +13,20 @@ import styles from './App.module.css';
 
 const App = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.contacts);
+  const {
+    items: contacts,
+    isLoading,
+    error,
+  } = useSelector(state => state.contacts.contacts);
+
   const filter = useSelector(state => state.contacts.filter);
 
-  const handleSubmit = (name, number) => {
-    dispatch(addContact({ name, number }));
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  const handleSubmit = contact => {
+    dispatch(addContact(contact));
   };
 
   const handleDeleteContact = id => {
@@ -31,6 +44,8 @@ const App = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Phonebook</h1>
+      {isLoading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
       <ContactForm onSubmit={handleSubmit} />
       <h2>Contacts</h2>
       <Filter
